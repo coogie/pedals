@@ -16,6 +16,11 @@
   dependencies:
     "@stencil/state-tunnel" "^1.0.1"
 
+"@stencil/sass@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stencil/sass/-/sass-1.0.1.tgz#9eec7b54029b14ba2f53f540687d91aeed90911a"
+  integrity sha512-3vmF8zir9FcVY/tYW0/V/pWrYSU684eASmALL2v29PGJvX6/CXh9n8LF7Jy95SpJPij3lisIUXLls7edXy2hYg==
+
 "@stencil/state-tunnel@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@stencil/state-tunnel/-/state-tunnel-1.0.1.tgz#21324f494ad719732505c8134099e415ac4c3c81"
