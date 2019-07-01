@@ -6,16 +6,13 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  MatchResults,
-} from '@stencil/router';
+
 
 export namespace Components {
   interface AppHome {}
-  interface AppProfile {
-    'match': MatchResults;
-  }
-  interface AppRoot {}
+  interface PedalBoard {}
+  interface PedalBoost {}
+  interface PedalOverdrive {}
 }
 
 declare global {
@@ -27,35 +24,42 @@ declare global {
     new (): HTMLAppHomeElement;
   };
 
-  interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
+  interface HTMLPedalBoardElement extends Components.PedalBoard, HTMLStencilElement {}
+  var HTMLPedalBoardElement: {
+    prototype: HTMLPedalBoardElement;
+    new (): HTMLPedalBoardElement;
   };
 
-  interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
-  var HTMLAppRootElement: {
-    prototype: HTMLAppRootElement;
-    new (): HTMLAppRootElement;
+  interface HTMLPedalBoostElement extends Components.PedalBoost, HTMLStencilElement {}
+  var HTMLPedalBoostElement: {
+    prototype: HTMLPedalBoostElement;
+    new (): HTMLPedalBoostElement;
+  };
+
+  interface HTMLPedalOverdriveElement extends Components.PedalOverdrive, HTMLStencilElement {}
+  var HTMLPedalOverdriveElement: {
+    prototype: HTMLPedalOverdriveElement;
+    new (): HTMLPedalOverdriveElement;
   };
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
-    'app-root': HTMLAppRootElement;
+    'pedal-board': HTMLPedalBoardElement;
+    'pedal-boost': HTMLPedalBoostElement;
+    'pedal-overdrive': HTMLPedalOverdriveElement;
   }
 }
 
 declare namespace LocalJSX {
   interface AppHome extends JSXBase.HTMLAttributes<HTMLAppHomeElement> {}
-  interface AppProfile extends JSXBase.HTMLAttributes<HTMLAppProfileElement> {
-    'match'?: MatchResults;
-  }
-  interface AppRoot extends JSXBase.HTMLAttributes<HTMLAppRootElement> {}
+  interface PedalBoard extends JSXBase.HTMLAttributes<HTMLPedalBoardElement> {}
+  interface PedalBoost extends JSXBase.HTMLAttributes<HTMLPedalBoostElement> {}
+  interface PedalOverdrive extends JSXBase.HTMLAttributes<HTMLPedalOverdriveElement> {}
 
   interface IntrinsicElements {
     'app-home': AppHome;
-    'app-profile': AppProfile;
-    'app-root': AppRoot;
+    'pedal-board': PedalBoard;
+    'pedal-boost': PedalBoost;
+    'pedal-overdrive': PedalOverdrive;
   }
 }
 
