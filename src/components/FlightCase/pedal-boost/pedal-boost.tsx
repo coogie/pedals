@@ -7,31 +7,55 @@ import { AudioContextManager } from "../../../global/AudioContextManager";
   shadow: true
 })
 export class PedalBoost {
+  @State() active: boolean = false;
+  @State() boost: number = 1.5;
   @State() toggle;
+
+  boostNode;
 
   componentWillLoad() {
     AudioContextManager.addPedal(input => {
       const ctx = AudioContextManager.context;
       const sum = ctx.createGain();
-      const boost = ctx.createGain();
+      const boostNode = ctx.createGain();
 
-      const [output, toggle] = AudioContextManager.createSwitch(input, sum);
+      const [output, toggle] = AudioContextManager.createSwitch(
+        input,
+        sum,
+        this.active
+      );
+
       this.toggle = toggle;
+      this.boostNode = boostNode;
 
-      boost.gain.value = 1.5;
-
-      input.connect(boost);
-      boost.connect(sum);
+      input.connect(boostNode);
+      boostNode.connect(sum);
 
       return output;
     });
   }
 
+  setBoostValue(e) {
+    const value = parseFloat(e.detail);
+    this.boostNode.gain.value = value;
+  }
+
+  toggleActive() {
+    this.active = !this.active;
+    this.toggle();
+  }
+
   render() {
     return (
       <div class="pedal-boost">
-        <h1>&lt;pedal-boost&gt;</h1>
-        <button onClick={this.toggle}>!</button>
+        <h1>&lt;pedal-boost&gt; {this.active.toString()}</h1>
+        <button onClick={() => this.toggleActive()}>!</button>
+        <pedal-knob
+          min={0}
+          max={3}
+          value={this.boost}
+          onRotate={e => this.setBoostValue(e)}
+        />
       </div>
     );
   }
