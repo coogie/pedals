@@ -16,7 +16,8 @@ export class PedalBoard {
   componentWillLoad() {
     const ctx = AudioContextManager.context;
     const audioTag = document.createElement("audio");
-    audioTag.src = "assets/audio/TombComb.mp3";
+    audioTag.src = "assets/audio/TheSeventies.mp3";
+    audioTag.loop = true;
     this.audioNode = audioTag;
 
     this.el.appendChild(audioTag);
@@ -27,10 +28,30 @@ export class PedalBoard {
     AudioContextManager.sealPedalBoard();
   }
 
+  togglePlaying() {
+    const ctx = AudioContextManager.context;
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+
+    if (!this.playing) {
+      this.audioNode.play();
+      this.playing = true;
+    } else if (this.playing) {
+      this.audioNode.pause();
+      this.playing = false;
+    }
+  }
+
   render() {
     return (
       <div class="pedal-board">
-        <h1>&lt;pedal-board&gt;</h1>
+        <h1>
+          Pedals
+          <button onClick={() => this.togglePlaying()}>
+            {this.playing ? "◼" : "►"}
+          </button>
+        </h1>
 
         <pedal-boost />
         <pedal-overdrive />
