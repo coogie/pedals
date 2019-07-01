@@ -6,6 +6,7 @@ import { Component, h, Prop, Event, EventEmitter } from "@stencil/core";
   shadow: true
 })
 export class PedalKnob {
+  @Prop() label: string;
   @Prop() max: number = 1;
   @Prop() min: number = 0;
   @Prop() step = "any";
@@ -20,7 +21,9 @@ export class PedalKnob {
   render() {
     return (
       <div class="pedal-knob">
+        <label htmlFor="knob">{this.label}</label>
         <input
+          id="knob"
           type="range"
           min={this.min}
           max={this.max}
