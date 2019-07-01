@@ -31,6 +31,8 @@ export class PedalBoard {
     return (
       <div class="pedal-board">
         <h1>&lt;pedal-board&gt;</h1>
+
+        <pedal-boost />
       </div>
     );
   }
