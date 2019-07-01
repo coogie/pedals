@@ -12,6 +12,13 @@ export namespace Components {
   interface AppHome {}
   interface PedalBoard {}
   interface PedalBoost {}
+  interface PedalKnob {
+    'label': string;
+    'max': number;
+    'min': number;
+    'step': string;
+    'value': number;
+  }
   interface PedalOverdrive {}
 }
 
@@ -36,6 +43,12 @@ declare global {
     new (): HTMLPedalBoostElement;
   };
 
+  interface HTMLPedalKnobElement extends Components.PedalKnob, HTMLStencilElement {}
+  var HTMLPedalKnobElement: {
+    prototype: HTMLPedalKnobElement;
+    new (): HTMLPedalKnobElement;
+  };
+
   interface HTMLPedalOverdriveElement extends Components.PedalOverdrive, HTMLStencilElement {}
   var HTMLPedalOverdriveElement: {
     prototype: HTMLPedalOverdriveElement;
@@ -45,6 +58,7 @@ declare global {
     'app-home': HTMLAppHomeElement;
     'pedal-board': HTMLPedalBoardElement;
     'pedal-boost': HTMLPedalBoostElement;
+    'pedal-knob': HTMLPedalKnobElement;
     'pedal-overdrive': HTMLPedalOverdriveElement;
   }
 }
@@ -53,12 +67,21 @@ declare namespace LocalJSX {
   interface AppHome extends JSXBase.HTMLAttributes<HTMLAppHomeElement> {}
   interface PedalBoard extends JSXBase.HTMLAttributes<HTMLPedalBoardElement> {}
   interface PedalBoost extends JSXBase.HTMLAttributes<HTMLPedalBoostElement> {}
+  interface PedalKnob extends JSXBase.HTMLAttributes<HTMLPedalKnobElement> {
+    'label'?: string;
+    'max'?: number;
+    'min'?: number;
+    'onRotate'?: (event: CustomEvent<any>) => void;
+    'step'?: string;
+    'value'?: number;
+  }
   interface PedalOverdrive extends JSXBase.HTMLAttributes<HTMLPedalOverdriveElement> {}
 
   interface IntrinsicElements {
     'app-home': AppHome;
     'pedal-board': PedalBoard;
     'pedal-boost': PedalBoost;
+    'pedal-knob': PedalKnob;
     'pedal-overdrive': PedalOverdrive;
   }
 }

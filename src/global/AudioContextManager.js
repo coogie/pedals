@@ -6,7 +6,6 @@ export const AudioContextManager = {
   toggleOnOff(dry, wet) {
     return on => {
       const active = on === undefined ? !!dry.gain.value : on;
-      console.log(active, on);
       if (active) {
         wet.gain.value = 1;
         dry.gain.value = 0;
