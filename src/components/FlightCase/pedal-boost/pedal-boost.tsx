@@ -9,9 +9,9 @@ import { AudioContextManager } from "../../../global/AudioContextManager";
 export class PedalBoost {
   @State() active: boolean = false;
   @State() boost: number = 1.5;
-  @State() toggle;
+  @State() toggle: Function;
 
-  boostNode;
+  boostNode: GainNode;
 
   componentWillLoad() {
     AudioContextManager.addPedal(input => {
@@ -49,8 +49,11 @@ export class PedalBoost {
     return (
       <div class="pedal-boost">
         <h1>&lt;pedal-boost&gt; {this.active.toString()}</h1>
-        <button onClick={() => this.toggleActive()}>!</button>
+        <button onClick={() => this.toggleActive()}>
+          <pre>{this.active ? "I" : "O"}</pre>
+        </button>
         <pedal-knob
+          label="Boost"
           min={0}
           max={3}
           value={this.boost}
