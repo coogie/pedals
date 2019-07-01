@@ -33,6 +33,7 @@ export class PedalBoard {
         <h1>&lt;pedal-board&gt;</h1>
 
         <pedal-boost />
+        <pedal-overdrive />
       </div>
     );
   }
