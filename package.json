@@ -1,5 +1,5 @@
 {
-  "name": "pedalboard",
+  "name": "pedals",
   "private": true,
   "version": "0.0.1",
   "description": "Stencil App Starter",
@@ -15,6 +15,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@stencil/sass": "^1.0.1"
+    "@stencil/sass": "^1.0.1",
+    "workbox-build": "4.3.1"
   }
 }
