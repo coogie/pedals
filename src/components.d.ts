@@ -20,6 +20,9 @@ export namespace Components {
     'value': number;
   }
   interface PedalOverdrive {}
+  interface PedalStomp {
+    'isActive': boolean;
+  }
 }
 
 declare global {
@@ -54,12 +57,19 @@ declare global {
     prototype: HTMLPedalOverdriveElement;
     new (): HTMLPedalOverdriveElement;
   };
+
+  interface HTMLPedalStompElement extends Components.PedalStomp, HTMLStencilElement {}
+  var HTMLPedalStompElement: {
+    prototype: HTMLPedalStompElement;
+    new (): HTMLPedalStompElement;
+  };
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement;
     'pedal-board': HTMLPedalBoardElement;
     'pedal-boost': HTMLPedalBoostElement;
     'pedal-knob': HTMLPedalKnobElement;
     'pedal-overdrive': HTMLPedalOverdriveElement;
+    'pedal-stomp': HTMLPedalStompElement;
   }
 }
 
@@ -76,6 +86,10 @@ declare namespace LocalJSX {
     'value'?: number;
   }
   interface PedalOverdrive extends JSXBase.HTMLAttributes<HTMLPedalOverdriveElement> {}
+  interface PedalStomp extends JSXBase.HTMLAttributes<HTMLPedalStompElement> {
+    'isActive'?: boolean;
+    'onStomp'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
     'app-home': AppHome;
@@ -83,6 +97,7 @@ declare namespace LocalJSX {
     'pedal-boost': PedalBoost;
     'pedal-knob': PedalKnob;
     'pedal-overdrive': PedalOverdrive;
+    'pedal-stomp': PedalStomp;
   }
 }
 
