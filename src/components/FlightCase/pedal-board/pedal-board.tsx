@@ -16,7 +16,7 @@ export class PedalBoard {
   componentWillLoad() {
     const ctx = AudioContextManager.context;
     const audioTag = document.createElement("audio");
-    audioTag.src = "assets/audio/TheSeventies.mp3";
+    audioTag.src = "assets/audio/VintageCombo.mp3";
     audioTag.loop = true;
     this.audioNode = audioTag;
 
