@@ -9,8 +9,8 @@ import { AudioContextManager } from "../../../global/AudioContextManager";
 export class PedalOverdrive {
   @State() toggle;
   @State() active: boolean = false;
-  @State() lowPassFreq = 3000;
-  @State() drive = 30;
+  @State() lowPassFreq = 5200;
+  @State() drive = 18;
 
   lowPassNode: BiquadFilterNode;
   overdriveNode: WaveShaperNode;
@@ -28,6 +28,7 @@ export class PedalOverdrive {
         this.active
       );
       this.toggle = toggle;
+      sum.gain.value = 1.175;
 
       this.overdriveNode.curve = this.makeDistortionCurve(this.drive);
       this.overdriveNode.oversample = "4x";
@@ -43,16 +44,15 @@ export class PedalOverdrive {
     });
   }
 
-  makeDistortionCurve(amount) {
-    const k = amount;
-    const n_samples = 44100;
-    const curve = new Float32Array(n_samples);
+  makeDistortionCurve(input) {
+    const samples = 44100;
+    const curve = new Float32Array(samples);
     const deg = Math.PI / 180;
     let i = 0;
     let x;
-    for (; i < n_samples; ++i) {
-      x = (i * 2) / n_samples - 1;
-      curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+    for (; i < samples; ++i) {
+      x = (i * 2) / samples - 1;
+      curve[i] = ((8 + input) * x * 18 * deg) / (Math.PI + input * Math.abs(x));
     }
     return curve;
   }
@@ -85,15 +85,15 @@ export class PedalOverdrive {
 
         <pedal-knob
           label="Drive"
-          min={20}
-          max={120}
+          min={10}
+          max={50}
           value={this.drive}
           onRotate={e => this.setDriveValue(e)}
         />
         <pedal-knob
           label="Tone"
-          min={2000}
-          max={7000}
+          min={3500}
+          max={7500}
           value={this.lowPassFreq}
           onRotate={e => this.setToneValue(e)}
         />
