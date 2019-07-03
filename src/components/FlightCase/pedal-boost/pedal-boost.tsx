@@ -48,16 +48,18 @@ export class PedalBoost {
   render() {
     return (
       <div class="pedal-boost">
-        <h1>&lt;pedal-boost&gt; {this.active.toString()}</h1>
-        <button onClick={() => this.toggleActive()}>
-          <pre>{this.active ? "I" : "O"}</pre>
-        </button>
+        <h1>&lt;pedal-boost&gt;</h1>
         <pedal-knob
           label="Boost"
           min={0}
           max={3}
           value={this.boost}
           onRotate={e => this.setBoostValue(e)}
+        />
+
+        <pedal-stomp
+          isActive={this.active}
+          onStomp={() => this.toggleActive()}
         />
       </div>
     );

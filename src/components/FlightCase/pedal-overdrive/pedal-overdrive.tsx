@@ -79,9 +79,6 @@ export class PedalOverdrive {
     return (
       <div class="pedal-overdrive">
         <h1>&lt;pedal-overdrive&gt;</h1>
-        <button onClick={() => this.toggleActive()}>
-          <pre>{this.active ? "I" : "O"}</pre>
-        </button>
 
         <pedal-knob
           label="Drive"
@@ -96,6 +93,11 @@ export class PedalOverdrive {
           max={7500}
           value={this.lowPassFreq}
           onRotate={e => this.setToneValue(e)}
+        />
+
+        <pedal-stomp
+          isActive={this.active}
+          onStomp={() => this.toggleActive()}
         />
       </div>
     );

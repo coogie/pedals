@@ -1,0 +1,70 @@
+:host {
+  --led: #48b2ee;
+}
+
+.PedalStomp__switch {
+  background: #464646;
+  border: 0;
+  border-top: 1px solid rgba(#000, 0.15);
+  border-radius: 3px;
+  font-size: 0;
+  height: 120px;
+  position: relative;
+  width: 100%;
+}
+
+.PedalStomp__switch::before,
+.PedalStomp__switch::after {
+  border-radius: 10px;
+  content: "";
+  height: 4px;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+}
+
+.PedalStomp__switch::before {
+  background: #343434;
+  border-top: 1px solid rgba(#000, 0.25);
+  border-bottom: 1px solid rgba(#fff, 0.25);
+  border-right: 2px solid rgba(#fff, 0.25);
+  border-left: 2px solid rgba(#000, 0.25);
+}
+
+.PedalStomp--active {
+  .PedalStomp__switch {
+    background: rgb(250, 250, 250);
+    background: linear-gradient(
+      to bottom,
+      rgb(66, 66, 66) 0%,
+      rgb(37, 37, 37) 85%,
+      rgb(2, 2, 2) 100%
+    );
+  }
+
+  .PedalStomp__switch::before {
+    background: var(--led);
+  }
+
+  .PedalStomp__switch::after {
+    box-shadow: 0 -1px 5px var(--led), -1px 0 5px var(--led),
+      1px 0 5px var(--led), 0 1px 5px rgba(#fff, 0.25);
+    opacity: 0.25;
+  }
+}
+// .PedalStomp__switch.off::after {
+//   height: 40px;
+// }
+// .PedalStomp__switch.off {
+// }
+// .PedalStomp__switch.off::before {
+//   background: #bac0c3;
+//   border-top: 1px solid #a6aeb1;
+//   border-bottom: 1px solid #a6aeb1;
+//   border-right: 2px solid #a6aeb1;
+//   border-left: 2px solid #a6aeb1;
+//   box-shadow: 0 -2px 0px #e3e1e0, -2px 0 0px #e3e1e0, 2px 0 0px #e3e1e0,
+//     0 2px 0px #fffdfd;
+// }
