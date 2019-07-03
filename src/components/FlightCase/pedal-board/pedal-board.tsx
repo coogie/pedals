@@ -16,7 +16,7 @@ export class PedalBoard {
   componentWillLoad() {
     const ctx = AudioContextManager.context;
     const audioTag = document.createElement("audio");
-    audioTag.src = "assets/audio/VintageCombo.mp3";
+    audioTag.src = "assets/audio/OrangeDrive.mp3";
     audioTag.loop = true;
     this.audioNode = audioTag;
 
@@ -45,7 +45,7 @@ export class PedalBoard {
 
   render() {
     return (
-      <div class="pedal-board">
+      <div class="PedalBoard">
         <h1>
           Pedals
           <button onClick={() => this.togglePlaying()}>
@@ -53,8 +53,10 @@ export class PedalBoard {
           </button>
         </h1>
 
-        <pedal-boost />
-        <pedal-overdrive />
+        <div class="PedalBoard__pedals">
+          <pedal-boost />
+          <pedal-overdrive />
+        </div>
       </div>
     );
   }

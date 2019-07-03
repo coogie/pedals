@@ -1,0 +1,8 @@
+.PedalBoard__pedals {
+  display: flex;
+
+  > * {
+    border: 1px solid;
+    margin: 1em;
+  }
+}
