@@ -1,6 +1,6 @@
 export const AudioContextManager = {
   context: new AudioContext(),
-  source: null,
+  sources: [],
   pedals: [],
 
   toggleOnOff(dry, wet) {
@@ -38,9 +38,15 @@ export const AudioContextManager = {
   },
 
   sealPedalBoard() {
+    const sum = this.context.createGain();
+    for (let source of this.sources) {
+      const node = this.context.createMediaElementSource(source);
+      node.connect(sum);
+    }
+
     const output = this.pedals.reduce((input, pedal) => {
       return pedal(input);
-    }, this.source);
+    }, sum);
     output.connect(this.context.destination);
   }
 };
