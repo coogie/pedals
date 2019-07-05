@@ -12,6 +12,7 @@ export namespace Components {
   interface AppHome {}
   interface PedalBoard {}
   interface PedalBoost {}
+  interface PedalChorus {}
   interface PedalKnob {
     'label': string;
     'max': number;
@@ -46,6 +47,12 @@ declare global {
     new (): HTMLPedalBoostElement;
   };
 
+  interface HTMLPedalChorusElement extends Components.PedalChorus, HTMLStencilElement {}
+  var HTMLPedalChorusElement: {
+    prototype: HTMLPedalChorusElement;
+    new (): HTMLPedalChorusElement;
+  };
+
   interface HTMLPedalKnobElement extends Components.PedalKnob, HTMLStencilElement {}
   var HTMLPedalKnobElement: {
     prototype: HTMLPedalKnobElement;
@@ -67,6 +74,7 @@ declare global {
     'app-home': HTMLAppHomeElement;
     'pedal-board': HTMLPedalBoardElement;
     'pedal-boost': HTMLPedalBoostElement;
+    'pedal-chorus': HTMLPedalChorusElement;
     'pedal-knob': HTMLPedalKnobElement;
     'pedal-overdrive': HTMLPedalOverdriveElement;
     'pedal-stomp': HTMLPedalStompElement;
@@ -77,6 +85,7 @@ declare namespace LocalJSX {
   interface AppHome extends JSXBase.HTMLAttributes<HTMLAppHomeElement> {}
   interface PedalBoard extends JSXBase.HTMLAttributes<HTMLPedalBoardElement> {}
   interface PedalBoost extends JSXBase.HTMLAttributes<HTMLPedalBoostElement> {}
+  interface PedalChorus extends JSXBase.HTMLAttributes<HTMLPedalChorusElement> {}
   interface PedalKnob extends JSXBase.HTMLAttributes<HTMLPedalKnobElement> {
     'label'?: string;
     'max'?: number;
@@ -95,6 +104,7 @@ declare namespace LocalJSX {
     'app-home': AppHome;
     'pedal-board': PedalBoard;
     'pedal-boost': PedalBoost;
+    'pedal-chorus': PedalChorus;
     'pedal-knob': PedalKnob;
     'pedal-overdrive': PedalOverdrive;
     'pedal-stomp': PedalStomp;

@@ -92,6 +92,7 @@ export class PedalBoard {
         </button>
 
         <div class="PedalBoard__pedals">
+          <pedal-chorus />
           <pedal-boost />
           <pedal-overdrive />
         </div>
