@@ -1,4 +1,4 @@
-# Pedals
+# Pedals (https://coog.ie/pedals)
 
 An exploration of the Web Components and the Web Audio API by building out various guitar effects pedals as modular components.
 
