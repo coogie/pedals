@@ -46,7 +46,7 @@ export const AudioContextManager = {
       if (name === "HTMLAudioElement") {
         node = this.context.createMediaElementSource(source);
       }
-      if (name === "LocalMediaStream") {
+      if (name === "LocalMediaStream" || name === "MediaStream") {
         node = this.context.createMediaStreamSource(source);
       }
 
