@@ -10,11 +10,13 @@ import { AudioContextManager } from "../../../global/AudioContextManager.js";
 export class PedalBoard {
   @Element() el;
   @State() playing: boolean = false;
+  @State() usingLine: boolean = false;
 
   demoFileNodes = [];
   audioNode;
+  lineNode;
 
-  componentWillLoad() {
+  async componentWillLoad() {
     const files = [
       "FloatingRotary",
       "NoFear",
@@ -34,6 +36,11 @@ export class PedalBoard {
       AudioContextManager.sources.push(tag);
     }
     this.el.appendChild(frag);
+
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    this.lineNode = stream;
+    AudioContextManager.sources.push(stream);
+    this.lineNode.getAudioTracks()[0].enabled = false;
 
     this.setActiveAudioNode(0);
   }
@@ -55,23 +62,55 @@ export class PedalBoard {
       ctx.resume();
     }
 
-    if (override) {
-      if (override === "pause") {
-        this.audioNode.pause();
-        this.playing = true;
-      }
-      if (override === "play") {
-        this.audioNode.play();
-        this.playing = true;
-      }
+    if (this.usingLine) this.toggleLineIn("stop");
+
+    if (override === "play") {
+      this.audioNode.play();
+      this.playing = true;
+      return;
+    }
+    if (override === "pause") {
+      this.audioNode.pause();
+      this.playing = false;
+      return;
     }
 
     if (!this.playing) {
       this.audioNode.play();
       this.playing = true;
-    } else if (this.playing) {
+      return;
+    }
+    if (this.playing) {
       this.audioNode.pause();
       this.playing = false;
+      return;
+    }
+  }
+
+  toggleLineIn(override = null) {
+    const track = this.lineNode.getAudioTracks()[0];
+    if (this.playing) this.togglePlaying("pause");
+
+    if (override === "stop") {
+      this.usingLine = false;
+      track.enabled = false;
+      return;
+    }
+    if (override === "start") {
+      this.usingLine = true;
+      track.enabled = true;
+      return;
+    }
+
+    if (this.usingLine) {
+      this.usingLine = false;
+      track.enabled = false;
+      return;
+    }
+    if (!this.usingLine) {
+      this.usingLine = true;
+      track.enabled = true;
+      return;
     }
   }
 
@@ -88,9 +127,12 @@ export class PedalBoard {
           ))}
         </select>
         <button onClick={() => this.togglePlaying()}>
-          {this.playing ? "◼" : "►"}
+          {this.playing ? "⏸️" : "▶️"}
+        </button>{" "}
+        |{" "}
+        <button onClick={() => this.toggleLineIn()}>
+          {this.usingLine ? "Stop" : "Use"} Line In
         </button>
-
         <div class="PedalBoard__pedals">
           <pedal-chorus />
           <pedal-boost />

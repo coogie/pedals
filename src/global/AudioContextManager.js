@@ -40,7 +40,16 @@ export const AudioContextManager = {
   sealPedalBoard() {
     const sum = this.context.createGain();
     for (let source of this.sources) {
-      const node = this.context.createMediaElementSource(source);
+      let node;
+      const { name } = source.constructor;
+
+      if (name === "HTMLAudioElement") {
+        node = this.context.createMediaElementSource(source);
+      }
+      if (name === "LocalMediaStream") {
+        node = this.context.createMediaStreamSource(source);
+      }
+
       node.connect(sum);
     }
 
