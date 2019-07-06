@@ -38,7 +38,15 @@ export class PedalBoard {
     this.el.appendChild(frag);
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const constraints = {
+        video: false,
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
+        }
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       this.lineNode = stream;
       AudioContextManager.sources.push(stream);
       this.lineNode.getAudioTracks()[0].enabled = false;

@@ -1,5 +1,5 @@
 export const AudioContextManager = {
-  context: new AudioContext(),
+  context: new AudioContext({ latencyHint: "playback" }),
   sources: [],
   pedals: [],
 
