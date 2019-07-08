@@ -1,3 +1,5 @@
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
 export const AudioContextManager = {
   context: new AudioContext({ latencyHint: "playback" }),
   sources: [],
