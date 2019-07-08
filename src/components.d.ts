@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AppHome {}
+  interface BoardOscilloscope {}
   interface PedalBoard {}
   interface PedalBoost {}
   interface PedalChorus {}
@@ -33,6 +34,12 @@ declare global {
   var HTMLAppHomeElement: {
     prototype: HTMLAppHomeElement;
     new (): HTMLAppHomeElement;
+  };
+
+  interface HTMLBoardOscilloscopeElement extends Components.BoardOscilloscope, HTMLStencilElement {}
+  var HTMLBoardOscilloscopeElement: {
+    prototype: HTMLBoardOscilloscopeElement;
+    new (): HTMLBoardOscilloscopeElement;
   };
 
   interface HTMLPedalBoardElement extends Components.PedalBoard, HTMLStencilElement {}
@@ -72,6 +79,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement;
+    'board-oscilloscope': HTMLBoardOscilloscopeElement;
     'pedal-board': HTMLPedalBoardElement;
     'pedal-boost': HTMLPedalBoostElement;
     'pedal-chorus': HTMLPedalChorusElement;
@@ -83,6 +91,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface AppHome extends JSXBase.HTMLAttributes<HTMLAppHomeElement> {}
+  interface BoardOscilloscope extends JSXBase.HTMLAttributes<HTMLBoardOscilloscopeElement> {}
   interface PedalBoard extends JSXBase.HTMLAttributes<HTMLPedalBoardElement> {}
   interface PedalBoost extends JSXBase.HTMLAttributes<HTMLPedalBoostElement> {}
   interface PedalChorus extends JSXBase.HTMLAttributes<HTMLPedalChorusElement> {}
@@ -102,6 +111,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'app-home': AppHome;
+    'board-oscilloscope': BoardOscilloscope;
     'pedal-board': PedalBoard;
     'pedal-boost': PedalBoost;
     'pedal-chorus': PedalChorus;

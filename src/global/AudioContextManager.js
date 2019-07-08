@@ -2,6 +2,7 @@ export const AudioContextManager = {
   context: new AudioContext({ latencyHint: "playback" }),
   sources: [],
   pedals: [],
+  lastInLine: null,
 
   toggleOnOff(dry, wet) {
     return on => {
@@ -56,6 +57,7 @@ export const AudioContextManager = {
     const output = this.pedals.reduce((input, pedal) => {
       return pedal(input);
     }, sum);
+    this.lastInLine = output;
     output.connect(this.context.destination);
   }
 };

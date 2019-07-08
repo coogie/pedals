@@ -236,6 +236,11 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
+oscilloscope@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/oscilloscope/-/oscilloscope-1.1.0.tgz#7462c791eec8f39e3605e2d3fd5d99aaae99b824"
+  integrity sha512-0XCDrNx7LsqNlmPjA9MVe6EED8sVR6EimA2tWexMoU+FJNXAHfpiH9vpWoAgkDGWZLnUl1turI2aTgdulvRvzw==
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"

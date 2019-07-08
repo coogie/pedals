@@ -9,7 +9,9 @@ export class AppHome {
   render() {
     return (
       <div class="app-home">
-        <pedal-board />
+        <board-oscilloscope>
+          <pedal-board />
+        </board-oscilloscope>
       </div>
     );
   }
