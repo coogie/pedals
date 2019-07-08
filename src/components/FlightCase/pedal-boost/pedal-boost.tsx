@@ -27,6 +27,7 @@ export class PedalBoost {
 
       this.toggle = toggle;
       this.boostNode = boostNode;
+      this.updateNodeValues();
 
       input.connect(boostNode);
       boostNode.connect(sum);
@@ -35,9 +36,14 @@ export class PedalBoost {
     });
   }
 
-  setBoostValue(e) {
-    const value = parseFloat(e.detail);
-    this.boostNode.gain.value = value;
+  updateNodeValues() {
+    this.boostNode.gain.value = this.boost;
+  }
+
+  setKnobValue(e) {
+    const { id, val } = e.detail;
+    if (id === "boost_knob") this.boost = val;
+    this.updateNodeValues();
   }
 
   toggleActive() {
@@ -54,7 +60,7 @@ export class PedalBoost {
           min={0}
           max={3}
           value={this.boost}
-          onRotate={e => this.setBoostValue(e)}
+          onRotate={e => this.setKnobValue(e)}
         />
 
         <pedal-stomp

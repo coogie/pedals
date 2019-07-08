@@ -30,11 +30,10 @@ export class PedalOverdrive {
       this.toggle = toggle;
       sum.gain.value = 1.175;
 
-      this.overdriveNode.curve = this.makeDistortionCurve(this.drive);
       this.overdriveNode.oversample = "4x";
-
       this.lowPassNode.type = "lowpass";
-      this.lowPassNode.frequency.value = this.lowPassFreq;
+
+      this.updateNodeValues();
 
       input.connect(this.overdriveNode);
       this.overdriveNode.connect(this.lowPassNode);
@@ -60,14 +59,18 @@ export class PedalOverdrive {
   setDriveValue(e) {
     const value = parseFloat(e.detail);
     this.drive = value;
-    this.overdriveNode.curve = this.makeDistortionCurve(this.drive);
   }
 
-  setToneValue(e) {
-    const value = parseFloat(e.detail);
-
-    this.lowPassFreq = value;
+  updateNodeValues() {
+    this.overdriveNode.curve = this.makeDistortionCurve(this.drive);
     this.lowPassNode.frequency.value = this.lowPassFreq;
+  }
+
+  setKnobValue(e) {
+    const { id, val } = e.detail;
+    if (id === "drive_knob") this.drive = val;
+    if (id === "tone_knob") this.lowPassFreq = val;
+    this.updateNodeValues();
   }
 
   toggleActive() {
@@ -85,14 +88,14 @@ export class PedalOverdrive {
           min={10}
           max={50}
           value={this.drive}
-          onRotate={e => this.setDriveValue(e)}
+          onRotate={e => this.setKnobValue(e)}
         />
         <pedal-knob
           label="Tone"
           min={3500}
           max={7500}
           value={this.lowPassFreq}
-          onRotate={e => this.setToneValue(e)}
+          onRotate={e => this.setKnobValue(e)}
         />
 
         <pedal-stomp

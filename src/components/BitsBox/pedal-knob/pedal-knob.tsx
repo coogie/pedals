@@ -15,7 +15,8 @@ export class PedalKnob {
   @Event() rotate: EventEmitter;
   inputHandler(event) {
     const val = parseFloat(event.target.value);
-    this.rotate.emit(val);
+    const id = `${this.label.toLowerCase()}_knob`;
+    this.rotate.emit({ id, val });
   }
 
   render() {
@@ -23,7 +24,6 @@ export class PedalKnob {
       <div class="pedal-knob">
         <label htmlFor="knob">{this.label}</label>
         <input
-          id="knob"
           type="range"
           min={this.min}
           max={this.max}
