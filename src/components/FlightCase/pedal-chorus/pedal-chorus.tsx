@@ -56,7 +56,7 @@ export class PedalChorus {
 
       return output;
     });
-        }
+  }
 
   updateNodeValues() {
     this.delayNode1.delayTime.value = this.delay;
@@ -66,10 +66,12 @@ export class PedalChorus {
     this.oscillator.frequency.value = this.speed;
   }
 
-      requestAnimationFrame(modulate);
-
-      return output;
-    });
+  setKnobValue(e) {
+    const { id, val } = e.detail;
+    if (id === "speed_knob") this.speed = val;
+    if (id === "delay_knob") this.delay = val;
+    if (id === "depth_knob") this.depth = val;
+    this.updateNodeValues();
   }
 
   toggleActive() {
@@ -81,6 +83,28 @@ export class PedalChorus {
     return (
       <div class="pedal-chorus">
         <h1>&lt;pedal-chorus&gt;</h1>
+
+        <pedal-knob
+          label="Speed"
+          min={0.2}
+          max={3}
+          value={this.speed}
+          onRotate={e => this.setKnobValue(e)}
+        />
+        <pedal-knob
+          label="Delay"
+          min={0.005}
+          max={0.075}
+          value={this.delay}
+          onRotate={e => this.setKnobValue(e)}
+        />
+        <pedal-knob
+          label="Depth"
+          min={0.05}
+          max={0.25}
+          value={this.depth}
+          onRotate={e => this.setKnobValue(e)}
+        />
 
         <pedal-stomp
           isActive={this.active}
