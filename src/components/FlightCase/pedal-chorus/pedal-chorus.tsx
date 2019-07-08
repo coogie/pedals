@@ -10,15 +10,27 @@ export class PedalChorus {
   @State() active: boolean = false;
   @State() toggle: Function;
 
+  @State() speed: number = 1;
+  @State() delay: number = 0.03;
+  @State() depth: number = 0.25;
+
+  delayNode1;
+  delayNode2;
+  delayNode3;
+  delaySum;
+  oscillator;
+
   componentWillLoad() {
     AudioContextManager.addPedal(input => {
-      const config = {
-        speed: 0.5,
-        delay: 0.0002,
-        depth: 0.0005
-      };
       const ctx = AudioContextManager.context;
       const sum = ctx.createGain();
+
+      const oscGain = ctx.createGain();
+      this.delayNode1 = ctx.createDelay();
+      this.delayNode2 = ctx.createDelay();
+      this.delayNode3 = ctx.createDelay();
+      this.delaySum = ctx.createGain();
+      this.oscillator = ctx.createOscillator();
 
       const [output, toggle] = AudioContextManager.createSwitch(
         input,
@@ -27,52 +39,32 @@ export class PedalChorus {
       );
       this.toggle = toggle;
 
-      const delayNode1 = ctx.createDelay();
-      delayNode1.delayTime.value = config.delay;
-      const delayNode2 = ctx.createDelay();
-      delayNode2.delayTime.value = config.delay * 1.5;
-      const delayNode3 = ctx.createDelay();
-      delayNode3.delayTime.value = config.delay * 2.25;
-
-      const oscGain = ctx.createGain();
-      oscGain.gain.value = config.depth;
-      const osc = ctx.createOscillator();
-      osc.frequency.value = config.speed;
+      this.updateNodeValues();
 
       input.connect(oscGain);
-      osc.connect(oscGain);
-      oscGain.connect(delayNode1.delayTime);
-      oscGain.connect(delayNode2.delayTime);
-      oscGain.connect(delayNode3.delayTime);
-      delayNode1.connect(delayNode2);
-      delayNode2.connect(delayNode3);
-      input.connect(delayNode3);
-      delayNode3.connect(sum);
+      this.oscillator.connect(oscGain);
+      oscGain.connect(this.delayNode1);
+      oscGain.connect(this.delayNode2);
+      oscGain.connect(this.delayNode3);
+      this.delayNode1.connect(this.delaySum);
+      this.delayNode2.connect(this.delaySum);
+      this.delayNode3.connect(this.delaySum);
+      this.delaySum.connect(sum);
       input.connect(sum);
 
-      osc.start(0);
+      this.oscillator.start(0);
 
-      const step = 0.0075;
-      const min = 0.25;
-      const max = 1.75;
-      let timeModulation = min;
-      let goingUp = false;
-      const modulate = () => {
-        if (this.active) {
-          if (goingUp) {
-            timeModulation += step;
-            if (timeModulation >= max) goingUp = false;
-          } else {
-            timeModulation -= step;
-            if (timeModulation <= min) goingUp = true;
-          }
-          oscGain.connect(delayNode1.delayTime);
-          oscGain.connect(delayNode2.delayTime);
-          oscGain.connect(delayNode3.delayTime);
+      return output;
+    });
         }
 
-        requestAnimationFrame(modulate);
-      };
+  updateNodeValues() {
+    this.delayNode1.delayTime.value = this.delay;
+    this.delayNode2.delayTime.value = this.delay * 1.1;
+    this.delayNode3.delayTime.value = this.delay * 1.25;
+    this.delaySum.gain.value = this.depth;
+    this.oscillator.frequency.value = this.speed;
+  }
 
       requestAnimationFrame(modulate);
 
