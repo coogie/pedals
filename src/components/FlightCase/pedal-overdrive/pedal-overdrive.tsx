@@ -51,7 +51,7 @@ export class PedalOverdrive {
     let x;
     for (; i < samples; ++i) {
       x = (i * 2) / samples - 1;
-      curve[i] = ((8 + input) * x * 18 * deg) / (Math.PI + input * Math.abs(x));
+      curve[i] = ((3 + input) * x * 57 * deg) / (Math.PI + input * Math.abs(x));
     }
     return curve;
   }
