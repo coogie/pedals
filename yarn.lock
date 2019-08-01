@@ -47,11 +47,11 @@
     "@hapi/hoek" "8.x.x"
 
 "@stencil/core@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.1.3.tgz#5b3994ddfc810867951b71c79254e7606187ed23"
-  integrity sha512-Pb8PfSvM/aK9h4G6ApYRcx315S+8+I27H5Qk/NSKx0M9/yAD1ureYhE7sMcupu/3mKMQmA7SLOa21aBTKISP4Q==
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.2.3.tgz#a87f8121254cdd0862964f7c453484464f20de34"
+  integrity sha512-kfeq5y6Ltp8ObiamdYYuzf9I+8kDYiogpfEleF/HGQHrfnp6y57IhpEjSTC4pgkbXFV/PzVwRVOl9dsbjlw8yw==
   dependencies:
-    typescript "3.5.2"
+    typescript "3.5.3"
 
 "@stencil/router@^1.0.1":
   version "1.0.1"
@@ -278,10 +278,10 @@ strip-comments@^1.0.2:
     babel-extract-comments "^1.0.0"
     babel-plugin-transform-object-rest-spread "^6.26.0"
 
-typescript@3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
-  integrity sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
+typescript@3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
+  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
 universalify@^0.1.0:
   version "0.1.2"
